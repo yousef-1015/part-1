@@ -1,6 +1,6 @@
 @tag
 Feature: Login
-
+ 
   @tag1
   Scenario Outline: Valid login
     Given the username should be filled "<username>"
