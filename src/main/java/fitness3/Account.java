@@ -1,5 +1,7 @@
 package fitness3;
 
+import java.util.Date;
+
 public class Account 
 {
 	private String username;
@@ -8,7 +10,7 @@ public class Account
 	private String role;
 	private String Status;
 	
-	private String birthdate;
+	private Date birthdate;
 	private String phonenumber;
 	
 	public boolean check;
@@ -22,7 +24,7 @@ public class Account
 	public void setUsername(String username)
 	{
 		this.username=username;
-	}
+	} 
 	public void setPassword(String password)
 	{
 		this.password=password;
@@ -35,14 +37,7 @@ public class Account
 	public String getRole(String role) {
 		return role;
 	}
-	public String getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(String birthdate) {
-        this.birthdate = birthdate;
-    }
-
+	
     public String getPhonenumber() {
         return phonenumber;
     }
@@ -74,6 +69,14 @@ public class Account
 
 	    public String getPassword() {
 	        return password;
+	    }
+	    
+	    public Date getBirthdate() {
+	        return birthdate;
+	    }
+
+	    public void setBirthdate(Date birthdate) {
+	        this.birthdate = birthdate;
 	    }
 
 	

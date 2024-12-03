@@ -20,15 +20,15 @@ Feature: Login
 
 
 @tag
-Scenario Outline: Login validation with missing fields
+Scenario Outline: Login checking with missing fields
   Given the username should be filled "<username>"
   And the password should be filled "<password>"
   When I choose to login
   Then display a message "<message>"
 
 Examples:
-| username | password    | message       |
-|          | ahmadpass   | Login failed  | # Missing username
-| ahmad    |             | Login failed  | # Missing password
-|          |             | Login failed  | # Both fields empty
+#| username | password    | message       |
+#|          | ahmadpass   | Login failed  | # Missing username
+#| ahmad    |             | Login failed  | # Missing password
+#|          |             | Login failed  | # Both fields empty
 

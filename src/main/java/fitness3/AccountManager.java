@@ -1,6 +1,7 @@
 package fitness3;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JOptionPane;
 
@@ -22,7 +23,7 @@ public class AccountManager
 	        accounts.add(newAccount); // Add the new account to the ArrayList
 	    }
 	    
-	    public boolean updateAccount(String username, String newPassword, String newRole, String newBirthdate, String newPhoneNumber) {
+	    public boolean updateAccount(String username, String newPassword, String newRole, Date newBirthdate, String newPhoneNumber) {
 	        for (Account account : accounts) {
 	            if (account.getUsername().equals(username)) {
 	                account.setPassword(newPassword);
@@ -32,12 +33,51 @@ public class AccountManager
 	                return true; // Update successful
 	            }
 	        }
+	        
 	        JOptionPane.showMessageDialog(null, "Username Does Not Exist ", "ERROR", JOptionPane.ERROR_MESSAGE);
 
 	        
 	        return false; // Account not found
 	    
 	    }
+	    
+	    
+	    public boolean updatePassword(String username, String newPassword) {
+	        for (Account account : accounts) {
+	            if (account.getUsername().equals(username)) {
+	                account.setPassword(newPassword);
+	                return true; 
+	            }
+	        }
+	        JOptionPane.showMessageDialog(null, "Username Does Not Exist ", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+	        return false; 
+	    }
+	    public boolean updateRole(String username, String newRole) {
+	        for (Account account : accounts) {
+	            if (account.getUsername().equals(username)) 
+	            {
+	                account.setRole(newRole);
+	                return true; 
+	            }
+	        }
+	        JOptionPane.showMessageDialog(null, "Username Does Not Exist ", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+	        return false; 
+	    }
+	    public boolean updateBirthdate(String username, Date newBirthdate) {
+	        for (Account account : accounts) {
+	            if (account.getUsername().equals(username)) {
+	                account.setBirthdate(newBirthdate);
+	                return true; 
+	            }
+	        }
+	        JOptionPane.showMessageDialog(null, "Username Does Not Exist ", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+	        return false; 
+	    }
+	    
+	    
 	    
 	    public boolean updateStatus (String username,String ustatus) 
 	    {
@@ -56,6 +96,17 @@ public class AccountManager
 	    	
 	    	
 	    }
+	    public boolean updatePhoneNumber(String username, String newPhoneNumber) {
+	        for (Account account : accounts) {
+	            if (account.getUsername().equals(username)) {
+	                account.setPhonenumber(newPhoneNumber);
+	                return true; 
+	            }
+	        }
+	        JOptionPane.showMessageDialog(null, "Username Does Not Exist ", "ERROR", JOptionPane.ERROR_MESSAGE);
+
+	        return false; 
+	    }
 	    
 	    
 	    
@@ -64,7 +115,7 @@ public class AccountManager
 	            System.out.println("Username: " + account.getUsername() + ", Password: " + account.getPassword() + ", Login Successful: " );
 	        }
 	    }
-
+ 
 	    // Method to get the list of accounts
 	    public ArrayList<Account> getAccounts() {
 	        return accounts;

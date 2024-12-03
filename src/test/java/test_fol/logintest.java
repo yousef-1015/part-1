@@ -14,7 +14,7 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "use_cases",glue="test_fol",plugin= {"html: target/cucumber.html"})
 
-public class logintest {
+public class logintest { 
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
