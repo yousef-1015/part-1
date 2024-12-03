@@ -11,7 +11,7 @@ import fitness3.AccountManager;
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
-
+    
 public class LoginFeatureTest {
     public  String Username, Password;
     public AccountManager loginaccount;
