@@ -14,7 +14,7 @@ Feature: Login
 | ahmad    | ahmadpass   | Login successful |
 | kareem   | kareempass  | Login successful |
 | fawzi    | fawzipass   | Login successful |
-| khaled   | khlaedpass  | Login successful |
+| khaled   | khaledpass  | Login successful |
 #| tamer    | wrongpass   | Login failed     | # Failing case
 
 

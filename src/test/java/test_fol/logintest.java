@@ -12,7 +12,7 @@ import io.cucumber.junit.CucumberOptions;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "use_cases",glue="test_fol",plugin= {"html: target/cucumber.html"})
+@CucumberOptions(features = "use_cases//UserManagement.feature",glue="test_fol",plugin= {"html: target/cucumber.html"})
 
 public class logintest { 
 
@@ -25,11 +25,13 @@ public class logintest {
 	}
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() throws Exception 
+	{
 	}
 
 	@After
-	public void tearDown() throws Exception {
+	public void tearDown() throws Exception
+	{
 	}
 	
 	

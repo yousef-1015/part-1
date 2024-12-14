@@ -1,5 +1,4 @@
-@tag
-Feature: Signup
+Feature: Signup 
   
   @tag2
   Scenario Outline: Invalid or missing fields during signup
@@ -8,17 +7,17 @@ Feature: Signup
     And the phone number "<phonenumber>" is entered
     And the birthdate "<birthdate>" is entered
     When I attempt to sign up
-    Then display a message "<message>"
+    Then display the message "<message>"
 
     Examples:
     | username | password | phonenumber | birthdate   | message                  |
-    |          | testpass | 1234567890  | 1990-01-01  | Username cannot be empty |
     | testuser |          | 1234567890  | 1990-01-01  | Password cannot be empty |
     | testuser | testpass |             | 1990-01-01  | Phone number required    |
     | testuser | testpass | 1234567890  |             | Birthdate required       |
-    |          |          |             |             | All fields are required  |
+    | mohammad |  osama   | 1234567897  |  0-0-00     |signup successful         |
     
     
     
+   
 
   

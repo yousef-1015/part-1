@@ -7,25 +7,31 @@ import io.cucumber.java.en.When;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import fitness3.AccountManager;
+import fitness3.Admin;
+
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
 import javax.swing.JOptionPane;
     
 public class LoginFeatureTest {
     public  String Username, Password;
-    public AccountManager loginaccount;
-
+    public Admin loginaccount;
+    
+    
+    
+    
+  
     public LoginFeatureTest() {
-        loginaccount = new AccountManager();
-        loginaccount.addAccount("ahmad", "ahmadpass");
-        loginaccount.addAccount("kareem", "kareempass");
-        loginaccount.addAccount("fawzi", "fawzipass");
-        loginaccount.addAccount("khaled", "khlaedpass");
+    	
+        loginaccount = new Admin();
+        loginaccount.addAccount("ahmad", "ahmadpass","ADMIN");
+        loginaccount.addAccount("kareem", "kareempass", "INSTRUCTOR");
+        loginaccount.addAccount("fawzi", "fawzipass", "CLIENT");
+        loginaccount.addAccount("khaled", "khaledpass", "CLIENT");
         
- 
-
+    
     }
+  
 
     @Given("the username should be filled {string}")
     public void the_username_should_be_filled(String username) {
@@ -43,26 +49,19 @@ public class LoginFeatureTest {
     }
     @Then("display a message {string}")
     public void display_a_message(String expectedMessage) {
-        boolean loginSuccessful = loginaccount.checkinfo(Username, Password);
-         
+        String role = loginaccount.checkinfo(Username, Password);
         String actualMessage;
 
-        if (loginSuccessful) {
-        	
-        	
-            JOptionPane.showMessageDialog(null, expectedMessage, "Login Status", JOptionPane.INFORMATION_MESSAGE);
-
-//            actualMessage = "Login successful";
-//        } else {
-//            actualMessage = "Login failed";
+        if (role != null) {
+            actualMessage = "Login successful. Role: " + role;
+            JOptionPane.showMessageDialog(null, actualMessage, "Login Status", JOptionPane.INFORMATION_MESSAGE);
+            assertTrue(true); // Login successful
+        } else {
+            actualMessage = "Login failed";
+            JOptionPane.showMessageDialog(null, actualMessage, "Login Status", JOptionPane.ERROR_MESSAGE);
+            assertTrue(false); // Login failed
         }
-
-       // JOptionPane.showMessageDialog(null, actualMessage, "Login Status", JOptionPane.INFORMATION_MESSAGE);
-        
-        //assertEquals(expectedMessage, actualMessage);
-        assertTrue(loginSuccessful);
-    }
 		
 		
-	}
+	}}
 
