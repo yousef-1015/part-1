@@ -10,6 +10,9 @@ public class Programm {
 	private String program_title, duration, difficulty_level, goals;
 	double price, revenue;
 	public ArrayList<Client> enrolledClients, attendedClients;	
+    private Session session;
+    
+    	
 	
 	
 	 
@@ -115,6 +118,20 @@ public class Programm {
 	    public void removeClient(Client client) {
 	        enrolledClients.remove(client);
 	    }
+	    
+	    
+	    public void setSession(Session session) {
+	    	
+	    	this.session= session;
+	    	
+	    	
+	    	
+	    	
+	    }
+	    
+	    
+	    
+	    
 	 
 	 
 
