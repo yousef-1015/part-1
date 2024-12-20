@@ -16,7 +16,6 @@ public class Account
 	private String birthdate;
 	private String phonenumber;
 	private String Feedback;
-
 	
 	public boolean check;
 	public boolean test;
@@ -44,6 +43,7 @@ public class Account
         this.totalPay = 0;
         this.joinDate = new Date();
         this.clientsManaged = 0;
+        this.Feedback=null;
     }
 	// Default constructor
     public Account() {
@@ -59,6 +59,8 @@ public class Account
         this.totalPay = 0;
         this.joinDate = new Date();
         this.clientsManaged = 0;
+        this.Feedback=null;
+
     }
 
 

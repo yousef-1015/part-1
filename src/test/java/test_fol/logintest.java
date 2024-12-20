@@ -12,7 +12,7 @@ import io.cucumber.junit.CucumberOptions;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "use_cases//ClientFeedback.feature",glue="test_fol",plugin= {"html: target/cucumber.html"})
+@CucumberOptions(features = "use_cases//feedback.feature",glue="test_fol",plugin= {"html: target/cucumber.html"})
 
 public class logintest { 
 

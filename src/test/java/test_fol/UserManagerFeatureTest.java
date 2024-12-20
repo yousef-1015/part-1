@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import fitness3.Account;
 import fitness3.Admin;
+import fitness3.Client;
 import io.cucumber.java.en.*;
 
 public class UserManagerFeatureTest {
@@ -18,6 +19,7 @@ public class UserManagerFeatureTest {
 	    public static Admin TAdmin	= new Admin();
 	    public String USERNAME,PASSWORD,PHONENUM,BDATE,ROLE,statuss;
 	    public boolean exsits;
+	    public Client Uclient = new Client();
 	    ArrayList<Account>  accounts= TAdmin.getAccounts();
 
 
@@ -98,7 +100,10 @@ public void i_attempt_to_add_the_account() {
     TAccount.setUsername(USERNAME);
     TAccount.setRole(ROLE);
     TAdmin.addAccount(TAccount);
-    Message = "Account added successfully"; 
+    Uclient.setaccount(TAccount);
+    Message = "Account added successfully";
+    TAdmin.displayAccounts();
+
 }
 
 
@@ -224,6 +229,8 @@ if (!USERNAME.isEmpty() && !PASSWORD.isEmpty() && !PHONENUM.isEmpty() && !BDATE.
    tempaccount.setPassword(PASSWORD);
    tempaccount.setPhonenumber(PHONENUM);
    tempaccount.setUsername(USERNAME);
+   tempaccount.setRole("INSTRUTCOR");
+
    TAdmin.addRequest(tempaccount);
    TAdmin.displayRequests();
 
@@ -275,8 +282,9 @@ public void i_attempt_to_retrieve_the_activity_statistics() {
 @Then("the activity statistics should be displayed for {string}")
 public void the_activity_statistics_should_be_displayed_for(String Username) 
 {
-	
-	
+    Uclient.setName("khaled");
+
+	TAdmin.viewClientActivity(Uclient);
 	 assertEquals(Username, USERNAME);
 	    // Display the message which contains the activity statistics
 	    JOptionPane.showMessageDialog(null, Message, "Activity Statistics", JOptionPane.INFORMATION_MESSAGE);

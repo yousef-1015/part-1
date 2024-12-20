@@ -6,7 +6,18 @@ import java.util.Date;
 import java.io.File;
 import java.io.IOException;
 
+import javax.swing.BoxLayout;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+import java.util.List;
 
 public class Admin 
 {
@@ -15,6 +26,7 @@ public class Admin
 	 public   ArrayList<String> feedbackList;
 	 public ArrayList <Account> requests;
 	 public static ArrayList <Programm> programs;
+	private final List<File> approvedPDFs = new ArrayList<>();
 
 	 
 
@@ -396,18 +408,7 @@ public class Admin
 		 		
 		 	}
 		 	
-		 	public void openPDF(File file) {
-		        if (file != null && Desktop.isDesktopSupported()) {
-		            try {
-		                Desktop.getDesktop().open(file);
-		                System.out.println("Opening PDF: " + file.getName());
-		            } catch (IOException e) {
-		                System.err.println("Failed to open PDF: " + e.getMessage());
-		            }
-		        } else {
-		            System.out.println("Cannot open file. Desktop is not supported.");
-		        }
-		    }
+		 	
 		 	public void getallfeedbacks() {
 		 	    for (Account account : accounts) {
 		 	        String feedback = account.getfeedback();
@@ -618,10 +619,156 @@ public class Admin
 		    	    client.addAdminMessage(message); // Send message to the client
 		    	    JOptionPane.showMessageDialog(null, "Feedback reviewed and message sent to client.", "Feedback Reviewed", JOptionPane.INFORMATION_MESSAGE);
 		    	} 
+		     public void viewClientActivity(Client client) {
+		         if (client == null) {
+		             JOptionPane.showMessageDialog(null, "Client not found.", "Error", JOptionPane.ERROR_MESSAGE);
+		             return;
+		         }
+
+		         StringBuilder activityDetails = new StringBuilder();
+		         activityDetails.append("Client Activity for: ").append(client.getName()).append("\n");
+
+		         // Enrolled Programs
+		         activityDetails.append("Enrolled Programs:\n");
+		         for (Programm program : client.getEnrolledPrograms()) {
+		             activityDetails.append("- ").append(program.getProgramTitle()).append("\n");
+		         }
+
+		         // Attended Programs
+		         activityDetails.append("Attended Programs:\n");
+		         for (Programm program : client.getAttendedPrograms()) {
+		             activityDetails.append("- ").append(program.getProgramTitle()).append("\n");
+		         }
+
+		         // Completed Programs
+		         activityDetails.append("Completed Programs:\n");
+		         for (Programm program : client.getCompletedPrograms()) {
+		             activityDetails.append("- ").append(program.getProgramTitle()).append("\n");
+		         }
+
+		         // Display the activity details in a dialog
+		         JOptionPane.showMessageDialog(null, activityDetails.toString(), "Client Activity", JOptionPane.INFORMATION_MESSAGE);
+		     }
+
+		     //////////////////////////////////
+		     
 		 	
 		 	
-		 	
-		 	
+		     public void openPDF(File file) {
+		         if (file != null && Desktop.isDesktopSupported()) {
+		             try {
+		                 Desktop.getDesktop().open(file);
+		                 System.out.println("Opening PDF: " + file.getName());
+		             } catch (IOException e) {
+		                 System.err.println("Failed to open PDF: " + e.getMessage());
+		             }
+		         } else {
+		             System.out.println("Cannot open file. Desktop is not supported.");
+		         }
+		     }
+
+		     public void launchAdminInterface(Instructor instructor) {
+		         SwingUtilities.invokeLater(() -> {
+		             JFrame frame = new JFrame("Admin PDF Management");
+		             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		             frame.setSize(800, 600);
+
+		             JPanel panel = new JPanel(new BorderLayout());
+
+		             JLabel titleLabel = new JLabel("Manage PDFs", SwingConstants.CENTER);
+		             titleLabel.setFont(new Font("Arial", Font.BOLD, 16));
+		             panel.add(titleLabel, BorderLayout.NORTH);
+
+		             JPanel centerPanel = new JPanel();
+		             centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+		             JScrollPane scrollPane = new JScrollPane(centerPanel);
+		             panel.add(scrollPane, BorderLayout.CENTER);
+
+		             JButton viewApprovedButton = new JButton("View Approved PDFs");
+		             JButton viewSubmittedButton = new JButton("View Submitted PDFs");
+		             JButton approveButton = new JButton("Approve Selected PDF");
+		             JButton viewSelectedButton = new JButton("View Selected PDF");
+
+		             JPanel buttonPanel = new JPanel();
+		             buttonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+		             buttonPanel.add(viewApprovedButton);
+		             buttonPanel.add(viewSubmittedButton);
+		             buttonPanel.add(viewSelectedButton);
+		             buttonPanel.add(approveButton);
+
+		             panel.add(buttonPanel, BorderLayout.SOUTH);
+
+		             frame.add(panel);
+		             frame.setVisible(true);
+
+		             ButtonGroup buttonGroup = new ButtonGroup();
+
+		             viewApprovedButton.addActionListener(e -> {
+		                 centerPanel.removeAll();
+		                 buttonGroup.clearSelection();
+		                 for (File file : approvedPDFs) {
+		                     JRadioButton radioButton = new JRadioButton(file.getName() + " (Approved)");
+		                     radioButton.setEnabled(false);
+		                     centerPanel.add(radioButton);
+		                 }
+		                 centerPanel.revalidate();
+		                 centerPanel.repaint();
+		             });
+
+		             viewSubmittedButton.addActionListener(e -> {
+		                 centerPanel.removeAll();
+		                 buttonGroup.clearSelection();
+		                 for (File file : instructor.getSubmittedPDFs()) {
+		                     JRadioButton radioButton = new JRadioButton(file.getName() + " (Not Approved)");
+		                     radioButton.setActionCommand(file.getAbsolutePath());
+		                     buttonGroup.add(radioButton);
+		                     centerPanel.add(radioButton);
+		                 }
+		                 centerPanel.revalidate();
+		                 centerPanel.repaint();
+		             });
+
+		             viewSelectedButton.addActionListener(e -> {
+		                 String selectedFilePath = buttonGroup.getSelection() != null
+		                         ? buttonGroup.getSelection().getActionCommand()
+		                         : null;
+		                 if (selectedFilePath != null) {
+		                     File file = new File(selectedFilePath);
+		                     openPDF(file);
+		                 } else {
+		                     JOptionPane.showMessageDialog(frame, "Please select a PDF to view.", "No Selection", JOptionPane.WARNING_MESSAGE);
+		                 }
+		             });
+
+		             approveButton.addActionListener(e -> {
+		                 String selectedFilePath = buttonGroup.getSelection() != null
+		                         ? buttonGroup.getSelection().getActionCommand()
+		                         : null;
+		                 if (selectedFilePath != null) {
+		                     List<File> submittedFiles = instructor.getSubmittedPDFs();
+		                     File approvedFile = null;
+		                     for (File file : submittedFiles) {
+		                         if (file.getAbsolutePath().equals(selectedFilePath)) {
+		                             approvedFile = file;
+		                             break;
+		                         }
+		                     }
+		                     if (approvedFile != null) {
+		                         approvedPDFs.add(approvedFile);
+		                         instructor.getSubmittedPDFs().remove(approvedFile);
+		                         JOptionPane.showMessageDialog(frame, "PDF approved: " + approvedFile.getName(), "Approval Success", JOptionPane.INFORMATION_MESSAGE);
+		                         viewSubmittedButton.doClick();
+		                     }
+		                 } else {
+		                     JOptionPane.showMessageDialog(frame, "Please select a PDF to approve.", "No Selection", JOptionPane.WARNING_MESSAGE);
+		                 }
+		             });
+		         });
+		     }
+
+		     public List<File> getApprovedPDFs() {
+		         return approvedPDFs;
+		     }
 		 	
 		 	
 		 	

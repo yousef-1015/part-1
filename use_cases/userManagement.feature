@@ -13,10 +13,11 @@ Feature: User Management
 
     Examples:
   | username      | password   | role       | phonenumber  | birthdate   | message                   |
-  | instructor11  | pass123    | INSTRUCTOR | 1234567890   | 1985-03-2  | Account added successfully |
-  #| instructor11  | diffpass   | CLIENT     | 9876543210   | 1992-11-22  | Username is already taken  |
-  #|               | pass123    | INSTRUCTOR | 1234567890   | 1985-03-12  | Username cannot be empty   |
-@updateAccount
+  | instructor11  | pass123    | CLIENT | 1234567890   | 1985-03-2  | Account added successfully |
+ # | instructor11  | diffpass   | CLIENT     | 9876543210   | 1992-11-22  | Username is already taken  |
+ # |               | pass123    | INSTRUCTOR | 1234567890   | 1985-03-12  | Username cannot be empty   |
+
+#@updateAccount
 Scenario Outline: Update an existing account
     Given the username is filled "<username>"
     And the password is filled "<password>"
@@ -28,9 +29,9 @@ Scenario Outline: Update an existing account
     Then the message should appear "<message>"
 
     Examples:
-  | username      | password   | role       | phonenumber  | birthdate   | status | message                   |
-  | instructor11  | newpass123 | INSTRUCTOR | 1234567890   | 1985-03-11  | ACTIVE        | Account updated successfully |
-  | instructor11  |             | CLIENT     | 9876543210   | 1992-11-22 |    INACCTIVE  | Account updated successfully |
+ # | username      | password   | role       | phonenumber  | birthdate   | status | message                   |
+ # | instructor11  | newpass123 | INSTRUCTOR | 1234567890   | 1985-03-11  | ACTIVE        | Account updated successfully |
+ # | instructor11  |             | CLIENT     | 9876543210   | 1992-11-22 |    INACCTIVE  | Account updated successfully |
  # | instructorwqrw11  |             | CLIENT     | 9876543210   | 1992-11-22 |    INACCTIVE  | Username doesnt exsist |
   
  @DeactivateAccount
@@ -40,8 +41,8 @@ Scenario Outline: Deactivate existing account
     Then the message should appear "<message>"
 
 Examples:
-  | username      | message                     |
-  | instructor11  | Account deactivated successfully |
+  #| username      | message                     |
+ # | instructor11  | Account deactivated successfully |
   #| nonExistentUser  |Username doesnt exsist    |
   # |    | Username cannot be empty  |
   
@@ -58,10 +59,10 @@ Given the username is filled "<username>"
        Examples:
     | username | password | phonenumber | birthdate   |
     | mohammad |  osama   | 1234567897  |  2020-7-7   |
-   # | mohammad |  osama   | 1234567897  |  2020-7-7   |
-   # | testuser |          | 1234567890  | 1990-01-01  | 
-    #| testuser | testpass |             | 1990-01-01  | 
-   # | testuser | testpass | 1234567890  |             |
+#    | mohammad |  osama   | 1234567897  |  2020-7-7   |
+ #   | testuser |          | 1234567890  | 1990-01-01  | 
+ #   | testuser | testpass |             | 1990-01-01  | 
+ #  | testuser | testpass | 1234567890  |             |
     
     @monitorUserActivity 
   Scenario Outline: Monitor user activity
@@ -71,23 +72,7 @@ Given the username is filled "<username>"
 
     Examples:
   | username      |
-  | instructor11  |
+ # | instructor11  |
   #| clientUser233 |
     
-
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   

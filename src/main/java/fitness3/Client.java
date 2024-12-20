@@ -250,6 +250,13 @@ public class Client {
         return attendedPrograms.size(); 
     }
 	
+    public ArrayList<Programm> getAttendedPrograms() {
+        return attendedPrograms;
+    }
+
+    public ArrayList<Programm> getCompletedPrograms() {
+        return finishedPrograms;
+    }
 	public int getFinishedProgramsCount() {
         return finishedPrograms.size(); 
     }
