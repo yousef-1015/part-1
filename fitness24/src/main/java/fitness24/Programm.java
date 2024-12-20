@@ -14,7 +14,7 @@ public class Programm {
     
     	
 	
-	
+	//////////////////
 	 
 	  public Programm(String program_title, String duration, String difficulty_level, String goals, double price) {
 		    revenue = 0.0;
