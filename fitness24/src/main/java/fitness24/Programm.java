@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 public class Programm {
 	
 	
-	private String program_title, duration, difficulty_level, goals;
+	private String program_title, duration, difficulty_level, goals, status;
 	double price, revenue;
 	public ArrayList<Client> enrolledClients, attendedClients;	
     private Session session;
@@ -25,9 +25,32 @@ public class Programm {
 	        this.goals = goals;
 	        this.enrolledClients = new ArrayList<>();
 	        this.attendedClients = new ArrayList<>();
+	        status = "active";
 	        
 	    }
 	  // Getters and Setters
+	  
+	    public void setStatusActive() {
+	        this.status = "active";
+	    }
+	  
+	  
+	  
+	    public void setStatusComplete() {
+	        this.status = "complete";
+	    }
+	    
+	    
+	    public String getStatus() {
+	    	
+	    	return status;
+	    	
+	    	
+	    }
+	    	
+	    	
+	    	
+	  
 	    public String getProgramTitle() {
 	        return program_title;
 	    }
@@ -43,6 +66,15 @@ public class Programm {
 	    public void setDuration(String duration) {
 	        this.duration = duration;
 	    }
+	    
+	    public double getPrice() {
+	        return this.price;
+	    }
+
+	    public void setPrice(double price) {
+	        this.price = price;
+	    }
+
 
 	    public String getDifficultyLevel() {
 	        return difficulty_level;
@@ -111,6 +143,7 @@ public class Programm {
 	    public void addClient(Client client) {
 	        if (!enrolledClients.contains(client)) {
 	            enrolledClients.add(client);
+	            client.enrollInProgram(this);
 	        }
 	    }
 
@@ -118,6 +151,18 @@ public class Programm {
 	    public void removeClient(Client client) {
 	        enrolledClients.remove(client);
 	    }
+	    
+	    
+public Session getSession() {
+	    	
+	    	return this.session;
+	    	
+	    	
+	    	
+	    	
+	    }
+	    
+	    
 	    
 	    
 	    public void setSession(Session session) {
@@ -128,7 +173,8 @@ public class Programm {
 	    	
 	    	
 	    }
-	    
+
+		
 	    
 	    
 	    

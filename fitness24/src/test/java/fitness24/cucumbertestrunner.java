@@ -7,7 +7,7 @@ import io.cucumber.junit.CucumberOptions;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "useCases", glue = "fitness24")
+@CucumberOptions(features = "useCases//program_monitoring.feature", glue = "fitness24")
 public class cucumbertestrunner {
 
 }

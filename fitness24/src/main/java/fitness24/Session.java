@@ -6,7 +6,15 @@ public class Session {
 	private String type;
 	private String description;
 	
-	
+	public Session(String description) {
+		
+		this.description= description;
+		setTypeInPerson();
+
+		
+
+		
+	}
 	
 	
 	

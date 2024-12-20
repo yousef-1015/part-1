@@ -16,6 +16,7 @@ public class Client {
     private ArrayList<Programm> enrolledPrograms; // List of programs the client has enrolled in
     private HashMap<Programm, String> achievements; // Program -> Badge/Achievement
     private ArrayList<String> feedback; // Feedback messages submitted to instructors
+	private ArrayList<Inbox> inboxList;
 
     // Constructor
     public Client(String id, String name, int age, String email, String fitnessGoal, String dietaryPreference) {
@@ -28,6 +29,7 @@ public class Client {
         this.weight = 0.0;
         this.bmi = 0.0;
         this.enrolledPrograms = new ArrayList<>();
+        inboxList=new ArrayList<>();
         this.achievements = new HashMap<>();
         this.feedback = new ArrayList<>();
     }
@@ -109,10 +111,74 @@ public class Client {
     public void submitFeedback(String feedbackMessage) {
         feedback.add(feedbackMessage);
     }
+    
+    public double getAttendance() {
+    	
+    
+    	
+    	double attendance=0;
+    	double enrolled = this.enrolledPrograms.size();
+    	
+    	if (enrolled==0) return 0;
+    	
+    	else {
+    	for (Programm program: this.enrolledPrograms) {
+    		
+    		if (program.attendedClients.contains(this))
+    			attendance++;
+    		
+    	}
+    	
+    	return attendance/enrolled;}
+    	
+    }
+    
+public double getCompletion() {
+    	
+    
+    	
+    	double completion=0;
+    	double enrolled = this.enrolledPrograms.size();
+    	
+    	if (enrolled==0) return 0;
+    	
+    	else {
+    	for (Programm program: this.enrolledPrograms) {
+    		
+    		if (program.getStatus().equals("complete"))
+    			completion++;
+    		
+    	}
+    	
+    	return completion/enrolled;}
+    	
+    }
+
+
+
+
+public String getProgress() {
+	
+	
+	       return "\n" + this.name + 
+	    		   "\nAttendance Rate: " + (getAttendance() * 100) + "%" +
+	               "\ncompletion rate:" + (getCompletion() * 100) + "%";
+	
+	
+	 
+}
 
     // Get all feedback
     public ArrayList<String> getFeedback() {
         return new ArrayList<>(feedback);
     }
+
+	public ArrayList<Inbox> getInboxList() {
+		return inboxList;
+	}
+
+	public void setInboxList(ArrayList<Inbox> inboxList) {
+		this.inboxList = inboxList;
+	}
 }
 

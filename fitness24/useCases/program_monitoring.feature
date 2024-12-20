@@ -13,7 +13,7 @@
 Scenario: Generate reports on revenue, attendance, and client progress=
        Given the system keeps track of revenue, attendance on each programm
        When i choose to generate a report for a certain program
-       Then a report should be generated
+       Then a report should be generated with the right values
 
 
 

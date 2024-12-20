@@ -129,33 +129,25 @@ public class ProgramMonitoringSteps {
 	}
 	
 	
-	 String generatedReport;
 	
 	@When("i choose to generate a report for a certain program")
 	public void i_choose_to_generate_a_report_for_a_certain_program() {
 		// Call the functions to calculate attendance rate and revenue
-	    double attendanceRate = ad.getProgramAttendanceRate(program);
-	    double revenue = ad.getProgramRevenue(program);
-
-	    // Save the results for validation in the @Then step
-	     generatedReport = "Program: " + program.getProgramTitle() +
-	                      "\nAttendance Rate: " + (attendanceRate * 100) + "%" +
-	                      "\nRevenue: $" + revenue;
+	    Admin.generateReport(program);
+	    
 	}
-	@Then("a report should be generated")
-	public void a_report_should_be_generated() {
+	@Then("a report should be generated with the right values")
+	public void a_report_should_be_generated_with_the_right_values() {
  
 		
 		double expectedAttendance= 0.5;
-		double actualAttendance= ad.getProgramAttendanceRate(program);
+		double actualAttendance= program.getAttendanceRate();
 		
 		double expectedRevenue = 200.0;
-		double actualRevenue= ad.getProgramRevenue(program);
+		double actualRevenue= program.getRevenue();
 		
-	    assertNotNull(generatedReport); // Check if the report is generated
 	    assertTrue(actualAttendance==expectedAttendance ); // Verify program title is in the report
 	    assertTrue(expectedRevenue==actualRevenue); // Verify attendance rate is in the report
-	    System.out.println(generatedReport);
 	}
 
 

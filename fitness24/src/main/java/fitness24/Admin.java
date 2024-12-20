@@ -7,7 +7,9 @@ import javax.swing.JOptionPane;
 
 public class Admin 
 {
-	 public ArrayList <Account> accounts;
+	
+	 public static ArrayList <Programm> programs;
+	 public static ArrayList <Account> accounts;
 	 public Admin() {
 	        accounts = new ArrayList<>(); // Initialize the ArrayList
 	    }
@@ -149,20 +151,7 @@ public class Admin
 	    }
 	    
 	    
-        public double getProgramAttendanceRate(Programm program) {
-	    	
-	    	return program.getAttendanceRate();
-	    	
-	    }
-        
-        
-        public double getProgramRevenue(Programm program) {
-	        return program.getEnrollment()* program.price;
-	    }
-	    
-	    
-	    
-	    public void viewStatistics(ArrayList<Programm> programm) {
+        public void viewStatistics(ArrayList<Programm> programm) {
 	        // Sort the programs based on the enrollment (descending order)
 
 	    	ArrayList<Programm> temp = programm;
@@ -172,6 +161,20 @@ public class Admin
 	            System.out.println("Program: " + program.getProgramTitle() + ", Enrollments: " + program.getEnrollment());
 	        }
 	    }
+        
+        
+        
+        public static void generateReport(Programm program) {
+            double attendanceRate = program.getAttendanceRate();
+            double revenue = program.getRevenue();
+
+            String generatedReport = "Program: " + program.getProgramTitle() +
+                                     "\nAttendance Rate: " + (attendanceRate * 100) + "%" +
+                                     "\nRevenue: $" + revenue;
+
+            // Display the report in a JOptionPane
+            JOptionPane.showMessageDialog(null, generatedReport, "Program Report", JOptionPane.INFORMATION_MESSAGE);
+        }
 	}
 	    
 	    
