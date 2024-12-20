@@ -10,6 +10,7 @@ public class Instructor {
     private ArrayList<String> fileStatuses = new ArrayList<>();
 	 public ArrayList <Client> Requests = new ArrayList<>();
 	 //public ArrayList <Account> requests;
+	    public ArrayList<String> suggestionsSent= new ArrayList<>();
 
 
 
@@ -43,7 +44,7 @@ public class Instructor {
         }
     }
     
-    public void addRequest(String id , String name, int age ,String email, String fitnessGoal ,String dietaryPreference)
+    public void addRequest(int id , String name, int age ,String email, String fitnessGoal ,String dietaryPreference)
 	 {
 		
 		 Client newAccount = new Client(id,name,age,email,fitnessGoal,dietaryPreference);
@@ -52,8 +53,38 @@ public class Instructor {
 	        Requests.add(newAccount); 
 		 
 	 }
+
+	/**
+	 * @return the suggestionsSent
+	 */
+	public ArrayList<String> getSuggestionsSent() {
+		return suggestionsSent;
+	}
+
+	/**
+	 * @param suggestionsSent the suggestionsSent to set
+	 */
+	public void setSuggestionsSent(ArrayList<String> suggestionsSent) {
+		this.suggestionsSent = suggestionsSent;
+	}
    
     
+	public void viewSuggestionsSent() {
+	    if (suggestionsSent.isEmpty()) {
+	        JOptionPane.showMessageDialog(null, "No Suggestions Sent");
+	    } else {
+	        String output = "Suggestions Sent:\n";
+	        for (String suggestion : suggestionsSent) {
+	            output += "- " + suggestion + "\n";
+	        }
+	        JOptionPane.showMessageDialog(null, output);
+	    }
+	}
+	
+//	public void addsuggestion() {}
+    	
+    	
+    	
     
     
 //    public void addRequest(Account newRequest) {
