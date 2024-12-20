@@ -1,10 +1,13 @@
-package fitness24;
+package fitness3;
 
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import fitness3.Admin;
+import fitness3.Client;
+import fitness3.Programm;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.When;
 import io.cucumber.java.en.Then;

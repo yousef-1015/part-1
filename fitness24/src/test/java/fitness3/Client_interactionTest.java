@@ -1,4 +1,4 @@
-package fitness24;
+package fitness3;
 
 import static org.junit.Assert.*;
 
@@ -10,6 +10,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fitness3.Client;
+import fitness3.Inbox;
+import fitness3.Instructor;
+import fitness3.Programm;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;

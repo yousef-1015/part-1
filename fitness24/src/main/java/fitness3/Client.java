@@ -1,4 +1,4 @@
-package fitness24;
+package fitness3;
 
 import java.util.ArrayList;
 import java.util.HashMap;

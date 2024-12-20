@@ -1,10 +1,10 @@
-package fitness24;
-
-import fitness24.firstclass;
+package fitness3;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import fitness3.firstclass;
 
 public class testing {
 
