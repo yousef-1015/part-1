@@ -13,9 +13,9 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "use_cases//AccountManagement.feature",glue="test_fol",plugin= {"html: target/cucumber.html"})
-
+//asydl
 public class logintest { 
-
+     
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
